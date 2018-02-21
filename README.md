@@ -2,7 +2,7 @@
 
 
 ## Demo
-[Deployed through now](https://dist-rqonnzsatm.now.sh/)
+[Calendar Page](https://manu-codes.github.io/react-simple-calendar/)
 
 
 ## Setup
