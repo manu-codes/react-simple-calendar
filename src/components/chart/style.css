@@ -1,0 +1,13 @@
+
+.chart-elem{
+    margin: 5px;
+    cursor: pointer;
+    vertical-align: middle;
+    background: #222;
+    display: inline-block;
+
+}
+.chart-txt{
+display: inline-block;
+    
+}
