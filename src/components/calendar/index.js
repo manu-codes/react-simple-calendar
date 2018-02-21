@@ -20,6 +20,9 @@ class Calendar extends React.Component {
         this.renderWeekHead = this.renderWeekHead.bind(this);
         this.renderWeeks = this.renderWeeks.bind(this);
         this.getDaysInMonth = this.getDaysInMonth.bind(this);
+        this.renderCaption = this.renderCaption.bind(this);
+        this.nextClick = this.nextClick.bind(this);
+        this.prevClick = this.prevClick.bind(this);
     }
     getDaysInMonth() {
         const { month, year } = this.state;
@@ -37,6 +40,7 @@ class Calendar extends React.Component {
         console.log(this.getDaysInMonth(this.state.month, this.state.year))
         return (<div className='cal'>
             <table>
+                {this.renderCaption()}
                 <tbody>
                     {this.renderWeekHead()}
                     {this.renderWeeks()}
@@ -48,6 +52,38 @@ class Calendar extends React.Component {
     renderWeekHead() {
         return <tr>{this.state.dayList.map((day) => <th key={day}>{day}</th>)}</tr>;
     }
+    prevClick() {
+        let { month, year } = this.state;
+        if (month == 0) {
+            month = 11;
+            year = year - 1;
+        } else {
+            month = month - 1;
+        }
+        this.setState({ month, year })
+    }
+    nextClick() {
+        let { month, year } = this.state;
+        if (month == 11) {
+            month = 0;
+            year = year + 1;
+        } else {
+            month = month + 1;
+        }
+        this.setState({ month, year })
+    }
+    renderCaption() {
+        const { month, monthList, year } = this.state;
+        return (
+            <caption>
+                <div>
+                    <button onClick={this.prevClick}>prev</button>
+                    {year + ' ' + monthList[month]}
+                    <button onClick={this.nextClick}>next</button>
+                </div>
+            </caption>
+        );
+    }
     renderWeeks() {
         const { month, year } = this.state;
         var date = new Date(year, month, 1);
@@ -56,7 +92,6 @@ class Calendar extends React.Component {
         var week = [];
         while (date.getMonth() === month) {
             var curr = new Date(date);
-            days.push(curr);
             week = this.pushDay(curr, week, curr.getDate() === 1)
             if (week.length === 7) {
                 rows.push(<Week days={week} />);
