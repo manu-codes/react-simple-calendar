@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.css';
-import Week from './week'
+
 class Calendar extends React.Component {
     constructor(props) {
         super(props);
@@ -11,7 +11,6 @@ class Calendar extends React.Component {
         this.state = {
             dayList: ['Sun', 'Mon', 'Tue',
                 'Wed', 'Thu', 'Fri', 'Sat'],
-            startDay: 'Sun',
             monthList: ['Jan', 'Feb', 'Mar',
                 'Apr', 'May', 'Jun', 'Jul',
                 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -76,22 +75,21 @@ class Calendar extends React.Component {
         const { month, monthList, year } = this.state;
         return (
             <caption>
-                <div>
-                    <button onClick={this.prevClick}>prev</button>
-                    {year + ' ' + monthList[month]}
-                    <button onClick={this.nextClick}>next</button>
+                <div className='cal-head'>
+                    <div onClick={this.prevClick} className='arrow-left'></div>
+                    {monthList[month] + '  ' + year}
+                    <div onClick={this.nextClick} className='arrow-right'></div>
                 </div>
             </caption>
         );
     }
     renderWeeks() {
         const { month, year } = this.state;
-        var date = new Date(year, month, 1);
-        var days = [];
-        var rows = [];
-        var week = [];
+        let date = new Date(year, month, 1);
+        let rows = [];
+        let week = [];
         while (date.getMonth() === month) {
-            var curr = new Date(date);
+            let curr = new Date(date);
             week = this.pushDay(curr, week, curr.getDate() === 1)
             if (week.length === 7) {
                 rows.push(<Week days={week} />);
@@ -119,5 +117,18 @@ class Calendar extends React.Component {
         }
         return week;
     }
+}
+class Week extends React.Component {
+    render() {
+        this.props.days.map((day, ind) => console.log(day, ind));
+        return <tr>
+            {this.props.days &&
+                this.props.days.map(
+                    (day) => day ? (<td key={day.getDate()}>{day.getDate()}</td>) : <td>  </td>
+                )
+            }
+        </tr>
+    }
+
 }
 export default Calendar;
