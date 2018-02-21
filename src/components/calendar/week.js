@@ -9,19 +9,11 @@ class Week extends React.Component {
         return <tr>
             {this.props.days &&
                 this.props.days.map(
-                    (day) => day ? (<td key={day.getDate()}>{day.getDate()}</td>) : <td> - </td>
+                    (day) => day ? (<td key={day.getDate()}>{day.getDate()}</td>) : <td>  </td>
                 )
             }
         </tr>
     }
-    render2() {
-        return <tr>
-            {this.props.days &&
-                this.props.days.map(
-                    (day) => day ? (<td>{day.getDate()}</td>) : <td> - </td>
-                )
-            }
-        </tr>
-    }
+   
 }
 export default Week;

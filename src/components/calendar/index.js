@@ -57,24 +57,32 @@ class Calendar extends React.Component {
         while (date.getMonth() === month) {
             var curr = new Date(date);
             days.push(curr);
-            week = this.pushDay(curr, week)
+            week = this.pushDay(curr, week, curr.getDate() === 1)
             if (week.length === 7) {
-                rows.push(<Week days={week}/>);
+                rows.push(<Week days={week} />);
                 week = [];
             }
             date.setDate(date.getDate() + 1);
         }
+        rows.push(<Week days={week} />);
         return rows;
 
     }
 
-    pushDay(day, week) {
+    pushDay(day, week, firstDay) {
         week = week || [];
+        if (firstDay) {
+            week = this.pushEmpty(week, day.getDay())
+        }
         week[day.getDay()] = day;
         return week;
     }
-    pushEmpty(){
-        
+    pushEmpty(week, start) {
+        while (start > -1) {
+            week[start] = null;
+            start--;
+        }
+        return week;
     }
 }
 export default Calendar;
