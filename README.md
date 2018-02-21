@@ -1,3 +1,4 @@
+
 ## Demo
 [Components Demo](https://manu-codes.github.io/react-simple-components/)
 
@@ -7,6 +8,8 @@ Focused on simplicity of the component, people who wanted to display simple comp
 ### Available Components
 
  1. Calendar view
+ 2. Simple Chart
+ 
 
 ## Setup
 
