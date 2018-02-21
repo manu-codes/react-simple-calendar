@@ -1,6 +1,7 @@
 
 
 
+
 ## Demo
 [Calendar Page](https://manu-codes.github.io/react-simple-calendar/)
 
@@ -8,8 +9,16 @@
 ## Setup
 
 ```
-$ git clone
-$ npm install
+$ git clone https://github.com/manu-codes/react-simple-calendar.git
+$ cd react-simple-calendar
+$ npm i
+```
+For Yarn users
+
+```
+$ git clone https://github.com/manu-codes/react-simple-calendar.git
+$ cd react-simple-calendar
+$ yarn install
 ```
 
 ## Running
