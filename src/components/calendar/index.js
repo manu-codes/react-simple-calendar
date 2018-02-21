@@ -36,7 +36,6 @@ class Calendar extends React.Component {
 
 
     render() {
-        console.log(this.getDaysInMonth(this.state.month, this.state.year))
         return (<div className='cal'>
             <table>
                 {this.renderCaption()}
@@ -120,7 +119,6 @@ class Calendar extends React.Component {
 }
 class Week extends React.Component {
     render() {
-        this.props.days.map((day, ind) => console.log(day, ind));
         return <tr>
             {this.props.days &&
                 this.props.days.map(

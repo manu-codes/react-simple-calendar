@@ -1,37 +1,78 @@
 .App {
-  text-align: center;
+    /* text-align: center; */
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px;
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+    background-color: #222;
+    height: 150px;
+    padding: 20px;
+    color: white;
 }
 
 .App-title {
-  font-size: 1.5em;
+    font-size: 1.5em;
 }
 
 .App-intro {
-  display: inline-block;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 33%;
-  height: 33%;
-  margin: auto;
+    /* display: inline-block; */
+}
 
+.sec {
+    display: inline-block;
+    padding: 20px;
+}
+
+
+
+
+/* LIST #4 */
+
+.comp-list {
+    width: 320px;
+    font-family: Georgia, Times, serif;
+    font-size: 15px;
+    vertical-align: top;
+}
+
+.comp-list ul {
+    list-style: none;
+}
+
+/* .comp-list ul li {} */
+
+.comp-list ul li a {
+    display: block;
+    text-decoration: none;
+    color: #000000;
+    background-color: #FFFFFF;
+    line-height: 30px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #CCCCCC;
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+/* .comp-listul li a:hover {
+    color: #FFFFFF;
+    background-image: url(../images/hover.png);
+    background-repeat: repeat-x;
+} */
+
+.comp-listul li a strong {
+    margin-right: 10px;
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

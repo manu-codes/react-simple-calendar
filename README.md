@@ -2,7 +2,7 @@
 [Components Demo](https://manu-codes.github.io/react-simple-components/)
 
 ## Note
-Focused on simplicity of the component, people who wanted to display simple components (not date picker) in their react app, can directly copy the components in this project.
+Focused on simplicity of the component, people who wanted to display simple components in their react app, can directly copy the components in this project.
 
 ### Available Components
 
