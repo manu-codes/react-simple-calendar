@@ -1,0 +1,7 @@
+.star {
+    transition: 1s;
+}
+
+svg:hover .star {
+    fill: darkslateblue;
+}

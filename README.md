@@ -9,6 +9,11 @@ Focused on simplicity of the component, people who wanted to display simple comp
 
  1. Calendar view
  2. Simple Chart
+
+
+ ### ToDo
+
+ Click events in all components
  
 
 ## Setup

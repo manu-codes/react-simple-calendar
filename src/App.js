@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Calendar from './components/calendar/'
 import Chart from './components/chart/'
+import Rating from './components/rating'
 
 class App extends React.Component {
   constructor(props) {
@@ -14,8 +15,10 @@ class App extends React.Component {
     switch (this.state.comp) {
       case 'Calendar':
         return <Calendar />;
-        case 'Chart':
-        return <Chart values={[55,33,69,44,22]} maxLen={300}/>;
+      case 'Chart':
+        return <Chart values={[55, 33, 69, 44, 22]} maxLen={300} />;
+      case 'Rating':
+        return <Rating max={5} value={3} size={24} color='#cccccc' baseColor='#ffcc00'/>
       default:
         return <Calendar />
     }
@@ -35,6 +38,9 @@ class App extends React.Component {
               </li>
               <li onClick={() => this.setState({ comp: 'Chart' })}>
                 <a href='#'>Chart</a>
+              </li>
+              <li onClick={() => this.setState({ comp: 'Rating' })}>
+                <a href='#'>Rating</a>
               </li>
             </ul>
           </section>
