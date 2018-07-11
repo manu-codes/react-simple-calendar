@@ -3,9 +3,6 @@ import './style.css';
 
 
 class Chart extends React.Component {
-    constructor(props) {
-        super(props);
-    }
     getPercentages(maxWidth) {
 
     }
