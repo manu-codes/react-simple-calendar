@@ -1,15 +1,9 @@
 .auto-sel-cont {
-    background-color: #3498DB;
-    color: white;
     padding: 16px;
     font-size: 16px;
-    border: none;
     cursor: pointer;
 }
 
-.auto-sel-cont:hover, .auto-sel-cont:focus {
-    background-color: #2980B9;
-}
 
 .auto-sel {
     position: relative;
@@ -32,5 +26,6 @@
     display: block;
 }
 
-.auto-sel a:hover {background-color: #ddd;}
+
+.sel-item{background-color: red;}
 
