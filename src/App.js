@@ -41,7 +41,7 @@ class App extends React.Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">React {this.state.comp}</h1>
+          <h1 className="App-title">React simple {this.state.comp}</h1>
         </header>
         <div className="App-intro">
           <section className='sec left-sec comp-list'>
