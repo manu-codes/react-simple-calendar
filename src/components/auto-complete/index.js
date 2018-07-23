@@ -17,8 +17,9 @@ class AutoCompleter extends React.Component {
             selectedIndex: -1
         }
     }
-    onKeyUp(a) {
-        switch (a.keyCode) {
+    onKeyUp(keyEvent) {
+        console.log(keyEvent.target.value);
+        switch (keyEvent.keyCode) {
             case 38:
                 return this.changeIndex(-1);
                 break;
@@ -30,7 +31,7 @@ class AutoCompleter extends React.Component {
                 break;
 
         }
-
+        this.setState({ show: keyEvent.target.value && keyEvent.target.value.length > 0 });
     }
     setSelectedText() {
         const item = this.props.data[this.temporaryData];
@@ -45,7 +46,7 @@ class AutoCompleter extends React.Component {
         this.length = 0;
         return (
             <div className="auto-sel">
-                <input onClick={this.dropClick} onKeyUp={
+                <input onKeyUp={
 
                     this.onKeyUp}
                     value={this.state.text}
@@ -63,26 +64,25 @@ class AutoCompleter extends React.Component {
 
     renderItems(props, state) {
         return state.show ? (
-            <div id="myauto-sel" className="auto-sel-content">
+            <div id="auto-sel" className="auto-sel-content">
                 {
                     props.data.map(
-                        (item, i) => this.itemRender(item,i)
+                        (item, i) => this.itemRender(item, i)
                     )
                 }
             </div>
         ) : null;
     }
-    itemRender(item,i) {
+    itemRender(item, i) {
         if (this.length < 4) {
             const flag = this.props.shouldItemRender(item, this.state.text);
+            let sel = '';
             if (flag) {
                 this.length++;
-            }
-            let sel = '';
-            if (this.length === this.state.selectedIndex) {
-                sel = 'sel-item';
-                this.temporaryData = i;
-                console.log(i);
+                if (this.length === this.state.selectedIndex) {
+                    sel = 'sel-item';
+                    this.temporaryData = i;
+                }
             }
             return flag ?
                 <div key={this.props.keyGen(item)}
