@@ -1,10 +1,12 @@
 import React from 'react';
 import './style.css';
-
+const MAX_LEN = 4;
 
 class AutoCompleter extends React.Component {
     length = 0
     temporaryData = null
+    lastItemRef = null
+    scrolledToView = false
     constructor(props) {
         super(props);
         this.dropClick = this.dropClick.bind(this);
@@ -18,7 +20,7 @@ class AutoCompleter extends React.Component {
         }
     }
     onKeyUp(keyEvent) {
-        console.log(keyEvent.target.value);
+
         switch (keyEvent.keyCode) {
             case 38:
                 return this.changeIndex(-1);
@@ -34,6 +36,7 @@ class AutoCompleter extends React.Component {
         this.setState({ show: keyEvent.target.value && keyEvent.target.value.length > 0 });
     }
     setSelectedText() {
+
         const item = this.props.data[this.temporaryData];
         this.setState({ text: this.props.labelDisplay(item) })
     }
@@ -61,6 +64,14 @@ class AutoCompleter extends React.Component {
             </div>
         )
     }
+    componentDidUpdate() {
+        if (!this.scrolledToView && this.state.show) {
+            if (this.lastItemRef) {
+                this.scrolledToView = true;
+                this.lastItemRef.scrollIntoView();
+            }
+        }
+    }
 
     renderItems(props, state) {
         return state.show ? (
@@ -74,8 +85,9 @@ class AutoCompleter extends React.Component {
         ) : null;
     }
     itemRender(item, i) {
-        if (this.length < 4) {
-            const flag = this.props.shouldItemRender(item, this.state.text);
+        if (this.length < MAX_LEN) {
+            const txt = this.state.text.replace(/[^\w\s]/gi, '');
+            const flag = this.props.shouldItemRender(item, txt);
             let sel = '';
             if (flag) {
                 this.length++;
@@ -85,7 +97,7 @@ class AutoCompleter extends React.Component {
                 }
             }
             return flag ?
-                <div key={this.props.keyGen(item)}
+                <div key={this.props.keyGen(item)} ref={(cont) => this.lastItemRef = this.length === MAX_LEN ? cont : null}
                     className={sel}>
                     {this.props.labelDisplay(item)}
                 </div>
