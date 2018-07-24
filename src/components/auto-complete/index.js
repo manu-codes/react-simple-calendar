@@ -9,13 +9,15 @@ class AutoCompleter extends React.Component {
     scrolledToView = false
     constructor(props) {
         super(props);
-        this.dropClick = this.dropClick.bind(this);
         this.itemRender = this.itemRender.bind(this);
         this.onKeyUp = this.onKeyUp.bind(this);
         this.changeIndex = this.changeIndex.bind(this);
+        this.checkForRenderFunction = this.checkForRenderFunction.bind(this);
+        this.textChange = this.textChange.bind(this);
         this.state = {
             show: false,
             text: '',
+            searchText: '',
             selectedIndex: -1
         }
     }
@@ -38,7 +40,12 @@ class AutoCompleter extends React.Component {
     setSelectedText() {
 
         const item = this.props.data[this.temporaryData];
-        this.setState({ text: this.props.labelDisplay(item) })
+        const text = this.props.labelDisplay(item);
+        this.setState({
+            text,
+            searchText: this.props.caseSensitive ? text : text.toLowerCase(),
+            show:false
+        })
     }
     changeIndex(increment) {
         let sel = this.state.selectedIndex + increment;
@@ -50,19 +57,23 @@ class AutoCompleter extends React.Component {
         return (
             <div className="auto-sel">
                 <input onKeyUp={
-
                     this.onKeyUp}
                     value={this.state.text}
                     onChange={
-                        (evt) => this.setState({
-                            text: evt.target.value,
-                            selectedIndex: 1
-                        })
+                        this.textChange
                     }
                     className="auto-sel-cont" />
                 {this.renderItems(this.props, this.state)}
             </div>
         )
+    }
+    textChange(evt) {
+        const text = evt.target.value;
+        this.setState({
+            text: evt.target.value,
+            selectedIndex: 1,
+            searchText: this.props.caseSensitive ? text : text.toLowerCase()
+        });
     }
     componentDidUpdate() {
         if (!this.scrolledToView && this.state.show) {
@@ -86,28 +97,53 @@ class AutoCompleter extends React.Component {
     }
     itemRender(item, i) {
         if (this.length < MAX_LEN) {
-            const txt = this.state.text.replace(/[^\w\s]/gi, '');
+            const txt =  this.state.searchText.replace(/[^\w\s]/gi, '') ;
             const flag = this.props.shouldItemRender(item, txt);
-            let sel = '';
+            let sel = 'auto-sel-child ';
             if (flag) {
                 this.length++;
                 if (this.length === this.state.selectedIndex) {
-                    sel = 'sel-item';
+                    sel += 'sel-item';
                     this.temporaryData = i;
                 }
             }
-            return flag ?
-                <div key={this.props.keyGen(item)} ref={(cont) => this.lastItemRef = this.length === MAX_LEN ? cont : null}
-                    className={sel}>
-                    {this.props.labelDisplay(item)}
-                </div>
-                : null;
+            if (flag) {
+                const itemIndex = this.length;
+                return (
+                    <div key={this.props.keyGen(item)}
+                        onClick={
+                            () => this.mouseAction(itemIndex, true)
+                        }
+                        onMouseOver={
+                            () => this.mouseAction(itemIndex)
+                        }
+                        ref={(cont) => this.lastItemRef = itemIndex === MAX_LEN ? cont : null}
+                        className={sel}>
+                        {this.checkForRenderFunction(item)}
+                    </div>
+                )
+            } else {
+                return null;
+            }
         } else {
             return null;
         }
     }
-    dropClick() {
-        this.setState({ show: !this.state.show }, () => console.log(this.state));
+    mouseAction(selectedIndex, click) {
+        this.setState({ selectedIndex }, () => {
+            if (click) {
+                this.setSelectedText();
+            }
+        });
+    }
+    checkForRenderFunction(item) {
+        if (this.props.itemRender) {
+            return this.props.itemRender(item);
+        } else if (this.props.labelDisplay) {
+            this.props.labelDisplay(item);
+        } else {
+            return item;
+        }
     }
 }
 export default AutoCompleter;

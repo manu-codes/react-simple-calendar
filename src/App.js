@@ -15,8 +15,9 @@ class App extends React.Component {
     switch (this.state.comp) {
       case 'AutoComplete':
         return <AutoComplete
+        caseSensitive={false}
           labelDisplay={
-            item => item.name
+            item => item.code
           }
           keyGen={
             item => item.code
@@ -27,6 +28,7 @@ class App extends React.Component {
           data={
             Airports
           }
+          itemRender={this.itemRender}
         />;
       case 'Calendar':
         return <Calendar />;
@@ -35,6 +37,14 @@ class App extends React.Component {
       default:
         return <Calendar />
     }
+  }
+  itemRender(item) {
+    return (
+      <div className="drp-cont">
+        <div className="drp-code">{item.code}</div>
+        <div className="drp-name">{item.name}</div>
+      </div>
+    );
   }
   render() {
     return (

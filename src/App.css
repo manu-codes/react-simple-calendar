@@ -27,7 +27,19 @@
     padding: 20px;
 }
 
-
+.drp-code{
+    font-size: 11px;
+    display: inline-block;
+}
+.drp-name{
+    font-size: 9px;
+    display: inline-block;
+    padding-left: 10px;   
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    width: 160px;
+}
 
 
 /* LIST #4 */

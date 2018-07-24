@@ -12,6 +12,7 @@
 
 .auto-sel-content {
     position: absolute;
+    width: 100%;
     background-color: #f1f1f1;
     min-width: 160px;
     overflow: auto;
@@ -19,7 +20,7 @@
     z-index: 1;
 }
 
-.auto-sel-content div {
+.auto-sel-child {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
@@ -27,5 +28,5 @@
 }
 
 
-.sel-item{background-color: red;}
+.sel-item{background-color: rgba(0,0,0,0.2)}
 
